@@ -2,7 +2,7 @@ import pytest
 
 import sys,os
 sys.path.append(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
-from proj.converter import generate_cusip, generate_checkdigit, convert
+from proj.converter import generate_cusip8, generate_cusip_checkdigit, convert
 
 @pytest.fixture
 def input():
@@ -14,13 +14,13 @@ def output():
     mod_cusip = ['AIH820185','CZ7201775','LAZ820180','OATZ72011']
     return mod_cusip
 
-def test_generate_cusip(input,output):
+def test_generate_cusip8(input,output):
     """
-    Test generate_cusip function, which returns a string of 8 alphanumeric
-    characters (modified CUSIP without checkdigit).
+    Test generate_cusip8 function, which returns a string of 8 alphanumeric
+    characters (modified CUSIP without checkdigit)
     """
     for i in range(len(input)):
-        assert(output[i][:8] == generate_cusip(input[i]))
+        assert(output[i][:8] == generate_cusip8(input[i]))
 
 def test_generate_checkdigit(input,output):
     test = 0

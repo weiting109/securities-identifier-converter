@@ -31,10 +31,18 @@
         <form action="{{ url_for('convert') }}" method="POST">
           <div class="form-group">
 
-            <label for="to-convert">Paste Bloomberg tickers (separated by commas) here:</label>
+            <label for="convert-type">Convert type</label>
+            <select class="custom-select" name="convert-type">
+              <option selected value="bb-to-cusip">Bloomberg-to-modified-CUSIP</option>
+            </select>
+
+            <br />
+
+            <label for="to-convert">Paste identifiers to be converted (separated by commas) here:</label>
             <textarea class="form-control" name="to-convert" rows="5">{{ to_convert }}</textarea>
 
             <br />
+
             <div class="text-right">
               <button type="submit" class="btn btn-light">Submit</button>
             </div>
@@ -45,8 +53,11 @@
 
       <div class="col">
         <form>
+          <br />
+          <br />
+          <br />
           <div class="form-group">
-            <label for="converted">Modified CUSIP identifiers:</label>
+            <label for="converted">Converted identifiers:</label>
             <textarea class="form-control" rows="5">{{ converted }}</textarea>
           </div>
           <br />

@@ -73,3 +73,17 @@ def convertBbtoCUSIP(bbticker):
     cusip8 = generate_cusip8(bbticker)
     checkdigit = generate_cusip_checkdigit(cusip8)
     return ''.join([cusip8,str(checkdigit)])
+
+# library of conversion functions
+convert_fns = {'bb-to-cusip':convertBbtoCUSIP}
+
+def convert_id(listof_tobeconverted, convert_fn):
+    """
+    Given a list of string identifiers listof_tobeconverted,
+    return a list of converted identifiers listof_converted using
+    function convert_fn.
+    """
+    listof_converted = []
+    for identifier in listof_tobeconverted:
+        listof_converted.append(convert_fn(identifier))
+    return listof_converted

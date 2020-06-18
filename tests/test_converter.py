@@ -2,7 +2,7 @@ import pytest
 
 import sys,os
 sys.path.append(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
-from proj.converter import generate_cusip8, generate_cusip_checkdigit, convert
+from proj.converter import generate_cusip8, generate_cusip_checkdigit, convertBbtoCUSIP
 
 @pytest.fixture
 def input():
@@ -30,6 +30,10 @@ def test_generate_cusip_checkdigit(input,output):
     for i in range(len(input)):
         assert(generate_cusip_checkdigit(output[i][:8]) == int(output[i][-1]))
 
-def test_convert(input):
-    test = 0
-    assert("test" == test)
+def test_convertBbtoCUSIP(input, output):
+    """
+    Test convertBbtoCUSIP function, which return 9-alphanumeric-character
+    modified CUSIP given Bloomberg ticker as a string.
+    """
+    for i in range(len(input)):
+        assert(convertBbtoCUSIP(input[i]) == output[i])

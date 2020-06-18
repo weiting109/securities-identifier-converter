@@ -16,30 +16,43 @@
 </head>
 
 <body>
+
   <div class="jumbotron text-center">
     <h1 class="display-4">Securities Identifier Converter</h1>
     <p class="lead">Convert between identifiers for your securities.</p>
 
     <p>*Beta mode: only Bloomberg ticker-to-modified CUSIP for now.</p>
   </div>
+
   <div class="container-fluid">
     <div class="row align-items-center">
 
       <div class="col">
         <form action="{{ url_for('convert') }}" method="POST">
           <div class="form-group">
-            <label for="to-convert">Paste Bloomberg tickers here:</label>
-            <textarea class="form-control" name="to-convert" rows="5"></textarea>
+
+            <label for="to-convert">Paste Bloomberg tickers (separated by commas) here:</label>
+            <textarea class="form-control" name="to-convert" rows="5">{{ to_convert }}</textarea>
+
             <br />
             <div class="text-right">
               <button type="submit" class="btn btn-light">Submit</button>
             </div>
+
           </div>
         <form>
       </div>
 
       <div class="col">
-        Modified CUSIP:
+        <form>
+          <div class="form-group">
+            <label for="converted">Modified CUSIP identifiers:</label>
+            <textarea class="form-control" rows="5">{{ converted }}</textarea>
+          </div>
+          <br />
+          <br />
+          <br />
+        <form>
       </div>
 
     </div>

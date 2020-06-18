@@ -30,20 +30,20 @@ def split_bbticker(bbticker):
 
     return prefix,month_char,year,sector
 
-def generate_cusip(bbticker):
+def generate_cusip8(bbticker):
     """
     Given a bloomberg ticker as a string, return a string of 8 alphanumeric
     characters (modified CUSIP without checkdigit).
     """
     prefix,month_char,year,_ = split_bbticker(bbticker)
     if len(prefix) == 1:
-        cusip = "".join([prefix,month_char,year[-1],year,year[-1]])
+        cusip8 = "".join([prefix,month_char,year[-1],year,year[-1]])
     elif len(prefix) == 2:
-        cusip = "".join([prefix,month_char,year[-1],year])
+        cusip8 = "".join([prefix,month_char,year[-1],year])
     else:
-        cusip = "".join([prefix,month_char,year[-1],year[:-1]])
+        cusip8 = "".join([prefix,month_char,year[-1],year[:-1]])
 
-    return cusip
+    return cusip8
 
 def generate_checkdigit():
     return void

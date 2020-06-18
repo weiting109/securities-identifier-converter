@@ -66,5 +66,10 @@ def generate_cusip_checkdigit(cusip8):
 
     return (10 - (sum%10))%10
 
-def convert():
-    return void
+def convertBbtoCUSIP(bbticker):
+    """
+    Given a Bloomberg ticker, return a 9-alphanumeric-character modified CUSIP.
+    """
+    cusip8 = generate_cusip8(bbticker)
+    checkdigit = generate_cusip_checkdigit(cusip8)
+    return ''.join([cusip8,str(checkdigit)])

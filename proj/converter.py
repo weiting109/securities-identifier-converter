@@ -11,7 +11,7 @@ def split_bbticker(bbticker):
 
     running = "" # ticker and month
     for c in bbticker:
-        if ord(c) < ord("0") or ord(c) > ord("9"):
+        if not c.isnumeric():
             running+=c
         else: break
     prefix = running[:-1].rstrip()

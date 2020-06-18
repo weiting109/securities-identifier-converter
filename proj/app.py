@@ -17,9 +17,10 @@ def index():
 @app.route('/convert/',methods=['GET','POST'])
 def convert():
     """
-    'GET' method API call takes string URL argument to-convert, a string of
-        identifiers to be converted separated by commas and returns a string
-        of converted identifiers, separated by commas.
+    'GET' method API call takes URL arguments:
+        - to-convert, a string of identifiers to be converted separated by commas
+        - convert-type, a string key used to call the corresponding conversion function
+        and returns a string of converted identifiers, separated by commas.
     'POST' method does similar, except arguments are received through front-end
         form and displayed on front-end.
     """

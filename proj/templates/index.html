@@ -2,27 +2,56 @@
 <html lang="en">
 
 <head>
+  <title> Securities Identifier Converter</title>
+
+  <!-- Meta tags -->
   <meta charset="utf-8" />
-  <title> Identifier Converter - {% block title %}{% endblock %}</title>
   <meta name="author" content="Wei-Ting Yap">
   <meta name="description" content="Securities identifier converter">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- Bootstrap 4.0 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Securities Identifier Converter</h1>
+    <p class="lead">Convert between identifiers for your securities.</p>
 
-     <div class="row bg-1 text-center" id="header">
-       <div class="col">
-         <h1> Identifier Converter </h1>
-       </div>
-     </div>
-
- </div>
-
-  <div id="footer">
-    <h4>Prepared by Wei-Ting Yap, for GIC.</h4>
+    <p>*Beta mode: only Bloomberg ticker-to-modified CUSIP for now.</p>
   </div>
+  <div class="container-fluid">
+    <div class="row align-items-center">
+
+      <div class="col">
+        <form action="{{ url_for('convert') }}" method="POST">
+          <div class="form-group">
+            <label for="to-convert">Paste Bloomberg tickers here:</label>
+            <textarea class="form-control" name="to-convert" rows="5"></textarea>
+            <br />
+            <div class="text-right">
+              <button type="submit" class="btn btn-light">Submit</button>
+            </div>
+          </div>
+        <form>
+      </div>
+
+      <div class="col">
+        Modified CUSIP:
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="container">
+    <hr class="my-4">
+    <p>Prepared by Wei-Ting Yap, for GIC.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </body>

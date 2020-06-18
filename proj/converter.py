@@ -45,13 +45,26 @@ def generate_cusip8(bbticker):
 
     return cusip8
 
-def generate_checkdigit():
-    return void
+def generate_cusip_checkdigit(cusip8):
+    """
+    Given an 8-alphanumeric character sting cusip8, return the check digit for
+    modified CUSIP.
+    """
+
+    # algorithm approach
+    sum = 0
+    for i in range(8):
+        c = cusip8[i]
+        if c.isnumeric():
+            v = int(c)
+        else:
+            p = ord(c)-ord('A')+1
+            v = p+9
+        if (i+1)%2 == 0: # if in even position
+            v *= 2
+        sum = sum + v//10 + v%10
+
+    return (10 - (sum%10))%10
 
 def convert():
     return void
-
-bbtickers = ['AIH8 Index','C Z7 Comdty','LAZ18 Comdty','OATZ7 Comdty']
-for t in bbtickers:
-    print(split_bbticker(t))
-    print(generate_cusip(t))

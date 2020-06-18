@@ -22,9 +22,13 @@ def test_generate_cusip8(input,output):
     for i in range(len(input)):
         assert(output[i][:8] == generate_cusip8(input[i]))
 
-def test_generate_checkdigit(input,output):
-    test = 0
-    assert("test" == test)
+def test_generate_cusip_checkdigit(input,output):
+    """
+    Test generate_cusip_checkdigit function, which returns a int check digit
+    when given a string of 8-alphanumeric-character CUSIP.
+    """
+    for i in range(len(input)):
+        assert(generate_cusip_checkdigit(output[i][:8]) == int(output[i][-1]))
 
 def test_convert(input):
     test = 0

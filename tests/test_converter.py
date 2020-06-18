@@ -11,7 +11,7 @@ def input():
 
 @pytest.fixture
 def output():
-    mod_cusip = ['AIH820185','CZ7201775','LAZ820180','OATZ72011']
+    mod_cusip = ['AIH820284','CZ7202773','LAZ820180','OATZ72029']
     return mod_cusip
 
 def test_generate_cusip8(input,output):

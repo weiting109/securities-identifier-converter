@@ -33,7 +33,7 @@ def convert():
     Passes form values to /api/convert/ to convert one identifier to another.
     """
 
-    r = requests.post('http://127.0.0.1:5000/api/convert/', json = request.form) #update URL to global variable or when deployed
+    r = requests.post('https://ticker-converter.herokuapp.com/api/convert/', json = request.form) #update URL to global variable or when deployed
 
     to_convert_str = request.form['to-convert']
     convert_type = request.form['convert-type']

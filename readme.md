@@ -5,7 +5,9 @@
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ pip3 install -r requirements.txt
-$ python3 proj/app.py
+$ export FLASK_ENV=development
+$ export FLASK_APP=proj
+$ python3 -m flask run
 ```
 Please run prototype app on localhost port 5000 (see 'To use API for conversion for more info')
 

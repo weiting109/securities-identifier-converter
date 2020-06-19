@@ -1,9 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import render_template, request, redirect, url_for, jsonify
 import requests
-from converter import convert_fns, convertBbtoCUSIP, convert_id
-
-app = Flask(__name__) #instantiate Flask app
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+from proj import app
+from .converter import convert_fns, convertBbtoCUSIP, convert_id
 
 @app.route('/')
 def index():
@@ -41,6 +39,3 @@ def convert():
     convert_type = request.form['convert-type']
 
     return render_template('index.html',to_convert=to_convert_str,converted=r.json()['converted']), 201
-
-if __name__ == '__main__':
-    app.run(debug=True)

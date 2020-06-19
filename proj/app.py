@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import requests
 from converter import convert_fns, convertBbtoCUSIP, convert_id
 
 app = Flask(__name__) #instantiate Flask app
@@ -14,32 +15,35 @@ def index():
     """
     return render_template('index.html',to_convert='',converted='')
 
-@app.route('/convert/',methods=['GET','POST'])
-def convert():
+@app.route('/api/convert/',methods=['POST'])
+def api_convert():
     """
-    'GET' method API call takes URL arguments:
-        - to-convert, a string of identifiers to be converted separated by commas
-        - convert-type, a string key used to call the corresponding conversion function
-        and returns a string of converted identifiers, separated by commas.
-    'POST' method does similar, except arguments are received through front-end
-        form and displayed on front-end.
+    API that accepts JSON input with keys 'to-convert' and 'convert-type',
+    returns JSON
     """
+    if not request.json:
+        abort(400)
 
-    if request.method == 'POST':
-        to_convert_str=request.form['to-convert']
-        convert_type = request.form['convert-type']
-    elif request.method == 'GET':
-        query_parameters = request.args
-        to_convert_str = query_parameters.get('to-convert')
-        convert_type = query_parameters.get('convert-type')
+    to_convert_str = request.json.get('to-convert','')
+    convert_type = request.json.get('convert-type','bb-to-cusip')
 
     to_convert = to_convert_str.split(',')
     converted = ', '.join(convert_id(to_convert,convert_fns[convert_type]))
 
-    if request.method == 'POST':
-        return render_template('index.html',to_convert=to_convert_str,converted=converted)
-    elif request.method == 'GET':
-        return converted
+    return jsonify({'converted':converted}), 201
+
+@app.route('/convert/',methods=['POST'])
+def convert():
+    """
+    Passes form values to /api/convert/ to convert one identifier to another.
+    """
+
+    r = requests.post('http://127.0.0.1:5000/api/convert/', json = request.form)
+
+    to_convert_str = request.form['to-convert']
+    convert_type = request.form['convert-type']
+
+    return render_template('index.html',to_convert=to_convert_str,converted=r.json()['converted'])
 
 if __name__ == '__main__':
     app.run(debug=True)

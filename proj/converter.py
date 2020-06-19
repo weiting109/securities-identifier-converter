@@ -70,6 +70,8 @@ def convertBbtoCUSIP(bbticker):
     """
     Given a Bloomberg ticker, return a 9-alphanumeric-character modified CUSIP.
     """
+    if bbticker == '':
+        return ''
     cusip8 = generate_cusip8(bbticker)
     checkdigit = generate_cusip_checkdigit(cusip8)
     return ''.join([cusip8,str(checkdigit)])
